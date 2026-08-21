@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – BornPixel</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & BORNPIXEL STYLES
+       ========================================================================== */
+    :root {
+      --bg-color: #0b0c10;
+      --card-bg: #12141c;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-blue: #3b82f6;
+      --text-white: #ffffff;
+      --text-gray: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-white);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==========================================================================
+       2. HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 12, 16, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent-blue);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: var(--text-gray);
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--text-white);
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. HERO SECTION & STATS BAR
+       ========================================================================== */
+    .hero {
+      text-align: center;
+      padding: 80px 0 40px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.2;
+    }
+
+    /* Tech Filter Tags */
+    .filter-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+
+    .tag-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-gray);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tag-btn:hover, .tag-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    /* Stats Grid */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 70px;
+      text-align: center;
+    }
+
+    .stat-item h2 {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--text-white);
+    }
+
+    .stat-item p {
+      color: var(--text-gray);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    /* ==========================================================================
+       4. PORTFOLIO GRID
+       ========================================================================== */
+    .section-title {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-gray);
+      margin-bottom: 30px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-bottom: 100px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-img-holder {
+      width: 100%;
+      height: 280px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .card-body {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-category {
+      color: var(--accent-blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .card-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-white);
+    }
+
+    .card-link i {
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover .card-link i {
+      transform: translateX(5px);
+    }
+
+    /* ==========================================================================
+       5. CALL TO ACTION & FOOTER
+       ========================================================================== */
+    .cta-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .cta-banner h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .cta-banner p {
+      color: var(--text-gray);
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 0;
+      color: var(--text-gray);
+      font-size: 14px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-widget {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25d366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .hero h1 { font-size: 32px; }
+      .stats-bar { grid-template-columns: 1fr; gap: 20px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+    }
+    /* Card Image Holder with Hover Scroll */
+.card-img-holder {
+  width: 100%;
+  height: 320px; /* Viewport Height */
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.screen-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 5s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(0%);
+}
+
+/* Hover karte hi image poori scroll hogi */
+.project-card:hover .screen-image {
+  transform: translateY(calc(-100% + 320px));
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">Velora<span>Creative</span></a>
+      <ul class="nav-menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#" class="active">Portfolio</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About us</a></li>
+      </ul>
+      <a href="#contact" class="btn-primary">Book a call</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <span class="hero-badge">Portfolio</span>
+      <h1>We partner with small teams with big ambition</h1>
+
+      <!-- Technology Tag Filters -->
+      <div class="filter-tags">
+        <button class="tag-btn active" data-filter="all">All</button>
+        <button class="tag-btn" data-filter="WordPress">WordPress</button>
+        <button class="tag-btn" data-filter="Figma">Figma</button>
+        <button class="tag-btn" data-filter="Shopify">Shopify</button>
+        <button class="tag-btn" data-filter="WooCommerce">WooCommerce</button>
+        <button class="tag-btn" data-filter="Custom Coded">Custom Coded</button>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <h2>99 +</h2>
+          <p>Completed Projects</p>
+        </div>
+        <div class="stat-item">
+          <h2>95 %</h2>
+          <p>Satisfaction Rate</p>
+        </div>
+        <div class="stat-item">
+          <h2>7 +</h2>
+          <p>Years of Experience</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <div class="section-title">COMPLETED PROJECTS</div>
+    <section class="portfolio-grid" id="portfolioGrid">
+      <!-- Dynamic Project Items Rendered via JavaScript -->
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-banner" id="contact">
+      <h2>Let's build something great together.</h2>
+      <p>Ready to transform your online presence? Let's book a meeting to discuss about your website project.</p>
+      <a href="demo.html" class="btn-primary" style="padding: 14px 32px; font-size: 16px;">Work with me</a>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div>VeloraCreative.com – @2026 All Rights Reserved</div>
+      <div>shvishal023@gmail.com | +91 9389875216</div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Widget -->
+  <a href="https://wa.me/919389875216" target="_blank" class="whatsapp-widget">
+    <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i>
+    Need Help? Chat with us
+  </a>
+
+  <!-- JavaScript Dynamic Functionality -->
+  <script>
+  // Saare projects ka data yahan hai
+  const projects = [
+    {
+      title: "Incredimate Studio - Website",
+      category: "Development",
+      type: "Custom Coded",
+      link: "https://www.incredimate.com/",
+      img: "./www.incredimate.com_ (4).png" // Teri image
+    },
+    {
+      title: "Portfolio-Editor",
+      category: "Development",
+      type: "Custom Coded",
+      link: "https://vishal-g95k.vercel.app/",
+      img: "./vishal-g95k.vercel.app_.png" // Teri image
+    },
+
+    {
+      title: "HNM Realtors Website",
+      category: "Design & Development",
+      type: "Figma",
+      link: "https://hnmrealtors.com/",
+      img: "./hnmrealtors.com_ (2).png"
+    },
+    {
+      title: "Youcreatives Podcast Website",
+      category: "Development",
+      type: "WordPress",
+      link: "https://youcreatives.se/",
+      img: "./youcreatives.se_ (1).png"
+    },
+    {
+      title: "Youcreatives Podcast Website",
+      category: "Development",
+      type: "WordPress",
+      link: "https://welsh-justin.vercel.app/",
+      img: "./welsh-justin.vercel.app_.png"
+    },
+    {
+      title: "Robinson Car Wreckers Website",
+      category: "Figma Design",
+      type: "Figma",
+      link: "https://www.figma.com/design/ckjbNOyvDq2aGpbbYJ1y0Z/Robinson---Car-Wreckers-Website?node-id=0-1&p=f&t=hhhlyfbnUAhK4ZOz-0",
+      img: "./www.figma.com_design_ckjbNOyvDq2aGpbbYJ1y0Z_Robinson---Car-Wreckers-Website_node-id=0-1&p=f&t=hhhlyfbnUAhK4ZOz-0.png"
+    },
+    {
+      title: "GK247 Current Affairs Website",
+      category: "Design & Development",
+      type: "WordPress",
+      link: "https://thegk247.com/",
+      img: "./www.thegk247.com_.png"
+    },
+    {
+      title: "BongLeads Landing page",
+      category: "Development",
+      type: "Shopify",
+      link: "https://bongleads.com/",
+      img: "./Screenshot 2026-08-21 145449.png"
+    }
+  ];
+
+  const grid = document.getElementById('portfolioGrid');
+
+  function displayProjects(items) {
+    grid.innerHTML = items.map(p => `
+      <div class="project-card">
+        <div class="card-img-holder">
+           <img class="screen-image" src="${p.img || 'https://via.placeholder.com/600x1200'}" alt="${p.title}">
+        </div>
+        <div class="card-body">
+          <span class="card-category">${p.category}</span>
+          <h3 class="card-title">${p.title}</h3>
+          <a href="${p.link || '#'}" target="_blank" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Filter Functionality
+  const filterBtns = document.querySelectorAll('.tag-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.dataset.filter;
+      if(filter === 'all') {
+        displayProjects(projects);
+      } else {
+        const filtered = projects.filter(p => p.type === filter || p.category.includes(filter));
+        displayProjects(filtered.length ? filtered : projects);
+      }
+    });
+  });
+
+  // Initial Load
+  displayProjects(projects);
+</script>
+</body>
+</html>
